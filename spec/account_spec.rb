@@ -3,6 +3,7 @@ require 'account'
 describe Account do
 
     it { is_expected.to respond_to :balance }
+    it { is_expected.to respond_to :t_history }
 
     describe "#deposit" do
     #edge cases - someone tries to deposit something that isnt a number

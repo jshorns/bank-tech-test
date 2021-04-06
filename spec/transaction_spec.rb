@@ -5,6 +5,7 @@ describe Transaction do
     it { is_expected.to respond_to :deposit? }
     it { is_expected.to respond_to :withdrawal? }
     it { is_expected.to respond_to :date }
+    it { is_expected.to respond_to :balance_after }
 
     describe '#amount' do
         it 'is nil on initialize' do
@@ -22,6 +23,13 @@ describe Transaction do
         it 'changes the amount of the transaction' do
             subject.set_amount(500)
             expect(subject.amount).to eq 500
+        end
+    end
+
+    describe '#set_balance_after' do
+        it 'changes the amount stored to balance_after' do
+            subject.set_balance_after(1000)
+            expect(subject.balance_after).to eq 1000
         end
     end
 
