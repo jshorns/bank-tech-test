@@ -2,6 +2,7 @@ class Transaction
     attr_reader :amount
     def initialize
         @amount = nil
+        @date = DateTime.now
     end
 
     def set_amount(amount)
@@ -17,6 +18,6 @@ class Transaction
     end
 
     def date
-
+      @date  
     end
 end

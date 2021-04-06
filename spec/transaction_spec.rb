@@ -7,9 +7,15 @@ describe Transaction do
     it { is_expected.to respond_to :date }
 
     describe '#amount' do
-    it 'is nil on initialize' do
-        expect(subject.amount).to be nil
+        it 'is nil on initialize' do
+            expect(subject.amount).to be nil
+        end
     end
+
+    describe '#date' do
+        it 'stores the date' do
+            expect(subject.date).to be_an_instance_of DateTime
+        end
     end
 
     describe '#set_amount' do
