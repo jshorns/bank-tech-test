@@ -1,9 +1,9 @@
 class Transaction
     attr_reader :amount, :balance_after
-    def initialize
+    def initialize(date = DateTime.now)
         @amount = nil
         @balance_after = nil
-        @date = DateTime.now
+        @date = date
     end
 
     def set_amount(amount)
@@ -24,6 +24,12 @@ class Transaction
 
     def date
       @date  
+    end
+
+    def print_transaction
+        if deposit? 
+            @date.strftime("%d/%m/%Y") + " || " + '%.2f' % @amount + " || || " + '%.2f' % @balance_after
+        end
     end
 
 end
