@@ -18,5 +18,27 @@ describe Transaction do
             expect(subject.amount).to eq 500
         end
     end
+
+    describe '#deposit?' do
+        it 'returns true if amount is above zero' do
+            subject.set_amount(500)
+            expect(subject.deposit?).to be true
+        end
+        it 'returns false if amount is below zero' do
+            subject.set_amount(-500)
+            expect(subject.deposit?).to be false
+        end
+    end
+
+    describe '#withdrawal?' do
+        it 'returns true if amount is below zero' do
+            subject.set_amount(-500)
+            expect(subject.withdrawal?).to be true
+        end
+        it 'returns false if amount is above zero' do
+            subject.set_amount(500)
+            expect(subject.withdrawal?).to be false
+        end
+    end
         
 end

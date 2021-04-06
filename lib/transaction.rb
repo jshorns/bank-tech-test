@@ -9,9 +9,11 @@ class Transaction
     end
 
     def deposit?
+        @amount > 0
     end
 
     def withdrawal?
+        @amount < 0
     end
 
     def date
