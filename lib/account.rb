@@ -8,18 +8,11 @@ class Account
 
     def deposit(amount)
         @balance += amount
-        record_transaction
     end
 
     def withdraw(negative_amount)
         @balance += negative_amount
-        record_transaction
     end
 
-private
-
-    def record_transaction(transaction = Transaction.new)
-        
-    end
 
 end

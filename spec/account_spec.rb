@@ -6,6 +6,7 @@ describe Account do
 
     describe "#deposit" do
     #edge cases - someone tries to deposit something that isnt a number
+    #also - amount cannot be zero
         it 'adds money to the balance' do
             expect { subject.deposit(1000) }.to change { subject.balance }.by 1000
         end
