@@ -18,7 +18,7 @@ class Account
 
 private
 
-    def record_transaction(transaction = Trasnsaction.new)
+    def record_transaction(transaction = Transaction.new)
         
     end
 
