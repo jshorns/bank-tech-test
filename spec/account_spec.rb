@@ -19,4 +19,18 @@ describe Account do
             expect { subject.withdraw(-500) }.to change { subject.balance }.by -500
         end
     end
+
+    describe "#record_transaction" do
+    let(:transaction) { double(:transaction, :date => DateTime.now) }
+     it 'adds transaction to the transaction history' do
+        expect { subject.record_transaction(500) }.to change { subject.t_history.length }.by 1
+     end
+     it 'adds records details of the transaction' do
+        expect(transaction).to receive(:set_amount)
+        expect(transaction).to receive(:set_balance_after)
+        subject.record_transaction(500, transaction)
+        expect(subject.t_history).to include(transaction)
+     end
+    end
+
 end
