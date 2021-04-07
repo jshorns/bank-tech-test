@@ -1,29 +1,21 @@
+# frozen_string_literal: true
+
+# Transaction class, for storing the details of transactions.
 class Transaction
-    attr_reader :amount, :balance_after
-    def initialize(date = DateTime.now)
-        @amount = nil
-        @balance_after = nil
-        @date = date
-    end
+  attr_reader :date
+  attr_accessor :amount, :balance_after
 
-    def set_amount(amount)
-        @amount = amount
-    end
+  def initialize(date = DateTime.now)
+    @amount = nil
+    @balance_after = nil
+    @date = date
+  end
 
-    def set_balance_after(balance)
-        @balance_after = balance
-    end
+  def deposit?
+    @amount.positive?
+  end
 
-    def deposit?
-        @amount > 0
-    end
-
-    def withdrawal?
-        @amount < 0
-    end
-
-    def date
-      @date  
-    end
-
+  def withdrawal?
+    @amount.negative?
+  end
 end
