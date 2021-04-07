@@ -1,31 +1,12 @@
-Specification
+## How to use
 
-Requirements
-
-You should be able to interact with your code via a REPL like IRB or the JavaScript console. (You don't need to implement a command line interface that takes input from STDIN.)
-
-Deposits, withdrawal.
-
-Account statement (date, amount, balance) printing.
-
-Data can be kept in memory (it doesn't need to be stored to a database or anything).
-
-## Acceptance criteria
-
-Given a client makes a deposit of 1000 on 10-01-2012
-And a deposit of 2000 on 13-01-2012
-And a withdrawal of 500 on 14-01-2012
-When she prints her bank statement
-Then she would see
-
-date || credit || debit || balance
-
-14/01/2012 || || 500.00 || 2500.00
-
-13/01/2012 || 2000.00 || || 3000.00
-
-10/01/2012 || 1000.00 || || 1000.00
-
+* This code covers basic bank account functionality. It is designed to meet the requirements and specifications detailed at the bottom of this README.
+* The code can be used through IRB by requiring the 'account.rb' file.
+* It is divided into 3 classes - the Account, which is designed as the user interface, for withdrawing money, depositing money, and adjusting the balance accordingly. The only user available methods should be .deposit, .withdraw and .statement in the Account class. The Transaction class records the details of the transaction. the TransactionHistory logs all transactions and prints out statements in the desired formats.
+* Amounts can be deposited or withdrawn using the so-named methods. The amount should be entered as a string with maximum two decimal places (e.g. "450.00"). The decision was made to have this input as a string to enable regexp matching to check for valid inputs (inputting "54.6789", for example, will throw an error).
+* Errors are also thrown if a user attempts to deposit or withdraw 0.
+* An error is thrown if a user attempts to withdraw money they do not have, which could be changed or adjusted if overdraft features were desired.
+* I have made 'record_transaction', which logs all the required transaction details, a private method in account. However I had previously written tests for this and I have left them in as commented in case this is not thought to be best practice.
 
 ## User stories
 
@@ -72,3 +53,28 @@ client->account: ".statement"
 account->t_history: "print_statement"
 t_history->t_history: "putses itself to console"
 ```
+## Requirements
+
+You should be able to interact with your code via a REPL like IRB or the JavaScript console. (You don't need to implement a command line interface that takes input from STDIN.)
+
+Deposits, withdrawal.
+
+Account statement (date, amount, balance) printing.
+
+Data can be kept in memory (it doesn't need to be stored to a database or anything).
+
+## Acceptance criteria
+
+Given a client makes a deposit of 1000 on 10-01-2012
+And a deposit of 2000 on 13-01-2012
+And a withdrawal of 500 on 14-01-2012
+When she prints her bank statement
+Then she would see
+
+date || credit || debit || balance
+
+14/01/2012 || || 500.00 || 2500.00
+
+13/01/2012 || 2000.00 || || 3000.00
+
+10/01/2012 || 1000.00 || || 1000.00
