@@ -9,15 +9,20 @@ class Account
     end
 
     def deposit(amount)
-        fail "You must input a valid number." unless amount.is_a? Numeric
+        amount = check_format(amount)
         @balance += amount
         record_transaction(amount)
-    end
+   end
 
     def withdraw(amount)
-        fail "You must input a valid number." unless amount.is_a? Numeric
+        amount = check_format(amount)
+        check_balance(amount)
         @balance -= amount
         record_transaction(-amount)
+    end
+
+    def statement
+        @t_history.print_statement
     end
 
     def record_transaction(amount, transaction = Transaction.new)
@@ -26,8 +31,16 @@ class Account
         @t_history.add_t(transaction)
     end
 
-    def statement
-        @t_history.print_statement
+    private
+
+    def check_format(amount)
+        fail "You must input a valid amount of money." unless amount.match(/^[0-9]*.[0-9][0-9]$/)
+        amount.to_f
     end
+
+    def check_balance(amount)
+        fail 'You do not have sufficient funds for that transaction' unless @balance - amount >= 0
+    end
+
 
 end
