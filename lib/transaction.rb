@@ -26,10 +26,4 @@ class Transaction
       @date  
     end
 
-    def print_transaction
-        if deposit? 
-            @date.strftime("%d/%m/%Y") + " || " + '%.2f' % @amount + " || || " + '%.2f' % @balance_after
-        end
-    end
-
 end

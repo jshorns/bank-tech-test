@@ -54,14 +54,5 @@ describe Transaction do
             expect(subject.withdrawal?).to be false
         end
     end
-
-    describe '#print_transaction' do
-        subject { described_class.new(DateTime.new(2021,4,6,15,56,7))}
-        it 'returns a string in the specified format' do
-            subject.set_amount(500)
-            subject.set_balance_after(1000)
-            expect(subject.print_transaction).to eq "06/04/2021 || 500.00 || || 1000.00"
-        end
-    end
         
 end
