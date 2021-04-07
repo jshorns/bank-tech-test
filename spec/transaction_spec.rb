@@ -6,6 +6,7 @@ describe Transaction do
     it { is_expected.to respond_to :withdrawal? }
     it { is_expected.to respond_to :date }
     it { is_expected.to respond_to :balance_after }
+    amount = 500.0
 
     describe '#amount' do
         it 'is nil on initialize' do
@@ -21,36 +22,36 @@ describe Transaction do
 
     describe '#set_amount' do
         it 'changes the amount of the transaction' do
-            subject.set_amount(500)
-            expect(subject.amount).to eq 500
+            subject.set_amount(amount)
+            expect(subject.amount).to eq amount
         end
     end
 
     describe '#set_balance_after' do
         it 'changes the amount stored to balance_after' do
-            subject.set_balance_after(1000)
-            expect(subject.balance_after).to eq 1000
+            subject.set_balance_after(amount)
+            expect(subject.balance_after).to eq amount
         end
     end
 
     describe '#deposit?' do
         it 'returns true if amount is above zero' do
-            subject.set_amount(500)
+            subject.set_amount(amount)
             expect(subject.deposit?).to be true
         end
         it 'returns false if amount is below zero' do
-            subject.set_amount(-500)
+            subject.set_amount(-amount)
             expect(subject.deposit?).to be false
         end
     end
 
     describe '#withdrawal?' do
         it 'returns true if amount is below zero' do
-            subject.set_amount(-500)
+            subject.set_amount(-amount)
             expect(subject.withdrawal?).to be true
         end
         it 'returns false if amount is above zero' do
-            subject.set_amount(500)
+            subject.set_amount(amount)
             expect(subject.withdrawal?).to be false
         end
     end
