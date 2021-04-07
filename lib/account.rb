@@ -9,11 +9,13 @@ class Account
     end
 
     def deposit(amount)
+        fail "You must input a valid number." unless amount.is_a? Numeric
         @balance += amount
         record_transaction(amount)
     end
 
     def withdraw(amount)
+        fail "You must input a valid number." unless amount.is_a? Numeric
         @balance -= amount
         record_transaction(-amount)
     end
@@ -27,5 +29,5 @@ class Account
     def statement
         @t_history.print_statement
     end
-    
+
 end

@@ -4,19 +4,25 @@ describe Account do
 
     it { is_expected.to respond_to :balance }
     it { is_expected.to respond_to :t_history }
-
+    amount = 500
     describe "#deposit" do
     #edge cases - someone tries to deposit something that isnt a number
     #also - amount cannot be zero
         it 'adds money to the balance' do
-            expect { subject.deposit(1000) }.to change { subject.balance }.by 1000
+            expect { subject.deposit(amount) }.to change { subject.balance }.by amount
+        end
+        it 'fails if input is not a number' do
+            expect { subject.deposit("hello") }.to raise_error("You must input a valid number.")
         end
     end
 
     describe "#withdraw" do
     # edge cases to come back to here. trying to withdraw money when there isn't enough. or do we want an overdraft function?
         it 'removes money from the balance' do
-            expect { subject.withdraw(500) }.to change { subject.balance }.by -500
+            expect { subject.withdraw(amount) }.to change { subject.balance }.by -amount
+        end
+        it 'fails if input is not a number' do
+            expect { subject.withdraw("hello") }.to raise_error("You must input a valid number.")
         end
     end
 
@@ -28,7 +34,7 @@ describe Account do
         expect(transaction).to receive(:set_amount)
         expect(transaction).to receive(:set_balance_after)
         expect(transaction_history).to receive(:add_t)
-        subject.record_transaction(500, transaction)
+        subject.record_transaction(amount, transaction)
      end
     end
 
