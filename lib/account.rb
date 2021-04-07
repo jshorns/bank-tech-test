@@ -22,7 +22,7 @@ class Account
     end
 
     def add_to_t_history(transaction)
-        @t_history << transaction
+        @t_history.unshift(transaction)
     end
 
     def print_amount(transaction)
@@ -36,6 +36,11 @@ class Account
     def print_transaction(transaction)
         #refactoring - make this just a q of outputting the middle bit. leave the rest to transaction history.
         transaction.date.strftime("%d/%m/%Y") + print_amount(transaction) + '%.2f' % transaction.balance_after
+    end
+
+    def print_statement
+        "date || credit || debit || balance\n" +
+        @t_history.map { |transaction| print_transaction(transaction)}.join("\n") 
     end
 
 end
