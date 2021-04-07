@@ -25,13 +25,13 @@ class Account
         @t_history.print_statement
     end
 
+    private
+
     def record_transaction(amount, transaction = Transaction.new)
         transaction.set_amount(amount)
         transaction.set_balance_after(@balance)
         @t_history.add_t(transaction)
     end
-
-    private
 
     def check_format(amount)
         fail "You must input a valid amount of money." unless amount.match(/^[0-9]*.[0-9][0-9]$/)
