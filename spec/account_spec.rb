@@ -43,10 +43,11 @@ describe Account do
 
   describe '#statement' do
     let(:transaction_history) { double(:transaction_history) }
+    let(:statement) { double(:statement) }
     subject { described_class.new(transaction_history) }
     it 'prints the transaction history' do
-      expect(transaction_history).to receive(:print_statement)
-      subject.statement
+      expect(statement).to receive(:print_statement).with(transaction_history)
+      subject.statement(statement)
     end
   end
   # describe "#record_transaction" do

@@ -33,14 +33,14 @@ class Account
     record_transaction(-amount)
   end
 
-  def statement
-    @transaction_history.print_statement
+  def statement(statement = Statement.new)
+    statement.print_statement(@transaction_history)
   end
 
   private
 
   def first_transaction?
-    @transaction_history.transactions.length == 0
+    @transaction_history.transactions.empty?
   end
 
   def record_transaction(amount, transaction = Transaction.new)
