@@ -6,30 +6,30 @@ require 'date'
 
 # Account class, for recording balance and making deposits and withdrawals.
 class Account
-  attr_reader :balance, :t_history
+  attr_reader :balance, :transaction_history
 
-  def initialize(t_history = TransactionHistory.new)
+  def initialize(transaction_history = TransactionHistory.new)
     @balance = 0
-    @t_history = t_history
+    @transaction_history = transaction_history
   end
 
   def deposit(amount)
     amount = check_format(amount)
-    zero_error(amount)
+    zero_value_transaction_error(amount)
     @balance += amount
     record_transaction(amount)
   end
 
   def withdraw(amount)
     amount = check_format(amount)
-    zero_error(amount)
+    zero_value_transaction_error(amount)
     check_balance(amount)
     @balance -= amount
     record_transaction(-amount)
   end
 
   def statement
-    @t_history.print_statement
+    @transaction_history.print_statement
   end
 
   private
@@ -37,7 +37,7 @@ class Account
   def record_transaction(amount, transaction = Transaction.new)
     transaction.amount = amount
     transaction.balance_after = @balance
-    @t_history.add_t(transaction)
+    @transaction_history.add_transaction(transaction)
   end
 
   def check_format(amount)
@@ -46,7 +46,7 @@ class Account
     amount.to_f
   end
 
-  def zero_error(amount)
+  def zero_value_transaction_error(amount)
     fail 'You must specify an amount more than zero.' if amount == 0
   end
 

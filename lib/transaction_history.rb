@@ -8,8 +8,8 @@ class TransactionHistory
     @transactions = []
   end
 
-  def add_t(transaction)
-    @transactions.unshift(transaction)
+  def add_transaction(transaction)
+    @transactions << transaction
   end
 
   def print_amount(transaction)
@@ -26,6 +26,6 @@ class TransactionHistory
 
   def print_statement
     "date || credit || debit || balance\n" +
-      @transactions.map { |transaction| print_transaction(transaction) }.join("\n")
+      @transactions.reverse.map { |transaction| print_transaction(transaction) }.join("\n")
   end
 end

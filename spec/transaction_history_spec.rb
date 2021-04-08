@@ -4,15 +4,13 @@ require 'transaction_history'
 
 describe TransactionHistory do
   it { is_expected.to respond_to :transactions }
-  describe '#add_t' do
-    let(:transaction1) { double(:transaction) }
-    let(:transaction2) { double(:transaction) }
-    it 'adds a transaction to the beginning of the array' do
-      expect { subject.add_t(transaction1) }.to change { subject.transactions.length }.by 1
-      subject.add_t(transaction1)
-      subject.add_t(transaction2)
-      expect(subject.transactions).to include transaction1
-      expect(subject.transactions[0]).to eq transaction2
+  describe '#add_transaction' do
+    let(:transaction) { double(:transaction) }
+    it 'adds a transaction to the array' do
+      expect { subject.add_transaction(transaction) }.to change { subject.transactions.length }.by 1
+      subject.add_transaction(transaction)
+      expect(subject.transactions).to include transaction
+      expect(subject.transactions[0]).to eq transaction
     end
   end
   describe '#print_transaction' do
@@ -31,9 +29,9 @@ describe TransactionHistory do
     let(:transaction2) { double(:transaction, amount: 2000.00, deposit?: true, withdrawal?: false, balance_after: 3000.00, date: DateTime.new(2012, 1, 13)) }
     let(:transaction3) { double(:transaction, amount: -500.00, deposit?: false, withdrawal?: true, balance_after: 2500.00, date: DateTime.new(2012, 1, 14)) }
     it 'prints out the transactions in the required format' do
-      subject.add_t(transaction1)
-      subject.add_t(transaction2)
-      subject.add_t(transaction3)
+      subject.add_transaction(transaction1)
+      subject.add_transaction(transaction2)
+      subject.add_transaction(transaction3)
       expect(subject.print_statement).to eq(
         "date || credit || debit || balance\n"  +
         "14/01/2012 || || 500.00 || 2500.00\n"  +
