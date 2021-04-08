@@ -3,7 +3,6 @@
 require 'transaction_history'
 
 describe TransactionHistory do
-  it { is_expected.to respond_to :transactions }
   describe '#add_transaction' do
     let(:transaction) { double(:transaction) }
     it 'adds a transaction to the array' do

@@ -6,7 +6,7 @@ require 'date'
 
 # Account class, for recording balance and making deposits and withdrawals.
 class Account
-  attr_reader :balance, :transaction_history
+  attr_reader :balance
 
   def initialize(transaction_history = TransactionHistory.new)
     @balance = 0

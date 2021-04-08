@@ -3,8 +3,6 @@
 require 'account'
 
 describe Account do
-  it { is_expected.to respond_to :balance }
-  it { is_expected.to respond_to :transaction_history }
   amount = '500.00'
   describe '#deposit' do
     # also - amount cannot be zero
