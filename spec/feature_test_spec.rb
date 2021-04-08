@@ -1,18 +1,22 @@
 require 'account'
 require 'date'
 
+
 describe 'feature test' do
     subject { Account.new }
-    date = DateTime.now.strftime("%d/%m/%Y")
+    date1 = DateTime.new(2012, 1, 10)
+    date2 = DateTime.new(2012, 1, 13)
+    date3 =  DateTime.new(2012, 1, 14)
     it 'meets the specifications' do
-        subject.deposit("1000")
-        subject.deposit("2000")
-        subject.withdraw("500")
-        expect(subject.statement).to eq(
+        subject.deposit("1000", Transaction.new(date1))
+        subject.deposit("2000", Transaction.new(date2))
+        subject.withdraw("500", Transaction.new(date3))
+        expect(STDOUT).to receive(:puts).with(
         "date || credit || debit || balance\n"  +
-        "#{date} || || 500.00 || 2500.00\n"  +
-        "#{date} || 2000.00 || || 3000.00\n" +
-        "#{date} || 1000.00 || || 1000.00"
+        "14/01/2012 || || 500.00 || 2500.00\n"  +
+        "13/01/2012 || 2000.00 || || 3000.00\n" +
+        '10/01/2012 || 1000.00 || || 1000.00'
       )
+      subject.statement
     end
 end

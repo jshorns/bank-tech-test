@@ -10,12 +10,13 @@ describe Statement do
       transaction_history.transactions << transaction1
       transaction_history.transactions << transaction2
       transaction_history.transactions << transaction3
-      expect(subject.print_statement(transaction_history)).to eq(
+      expect(STDOUT).to receive(:puts).with(
         "date || credit || debit || balance\n"  +
         "14/01/2012 || || 500.00 || 2500.00\n"  +
         "13/01/2012 || 2000.00 || || 3000.00\n" +
         '10/01/2012 || 1000.00 || || 1000.00'
       )
+      subject.print_statement(transaction_history)
     end
   end
 end

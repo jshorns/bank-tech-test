@@ -20,17 +20,17 @@ class Account
     end
   end
 
-  def deposit(amount)
+  def deposit(amount, transaction = Transaction.new(date = DateTime.now))
     amount = check_format(amount)
     zero_value_transaction_error(amount)
-    record_transaction(amount)
+    record_transaction(amount, transaction)
   end
 
-  def withdraw(amount)
+  def withdraw(amount, transaction = Transaction.new(date = DateTime.now))
     amount = check_format(amount)
     zero_value_transaction_error(amount)
     check_balance(amount)
-    record_transaction(-amount)
+    record_transaction(-amount, transaction)
   end
 
   def statement(statement = Statement.new)
@@ -43,7 +43,7 @@ class Account
     @transaction_history.transactions.empty?
   end
 
-  def record_transaction(amount, transaction = Transaction.new)
+  def record_transaction(amount, transaction)
     transaction.amount = amount
     transaction.balance_after = balance + amount
     @transaction_history.add_transaction(transaction)
@@ -60,8 +60,7 @@ class Account
   end
 
   def check_balance(amount)
-    return if first_transaction?
-    fail 'You do not have sufficient funds for that transaction' unless @transaction_history.transactions.last.balance_after - amount >= 0
+    fail 'You do not have sufficient funds for that transaction' unless balance - amount >= 0
   
   end
 end
