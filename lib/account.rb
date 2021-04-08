@@ -2,6 +2,7 @@
 
 require_relative 'transaction'
 require_relative 'transaction_history'
+require_relative 'statement'
 require 'date'
 
 # Account class, for recording balance and making deposits and withdrawals.

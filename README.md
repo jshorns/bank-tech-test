@@ -1,5 +1,6 @@
 ## How to use
 
+* These points are from my first attempt at this tech test. See below the irb screenshot for post-review comments and updates.
 * This code covers basic bank account functionality. It is designed to meet the requirements and specifications detailed at the bottom of this README.
 * The code can be used through IRB by requiring the 'account.rb' file.
 * It is divided into 3 classes - the Account, which is designed as the user interface, for withdrawing money, depositing money, and adjusting the balance accordingly. The only user available methods should be .deposit, .withdraw and .statement in the Account class. The Transaction class records the details of the transaction. the TransactionHistory logs all transactions and prints out statements in the desired formats.
@@ -7,6 +8,16 @@
 * Errors are also thrown if a user attempts to deposit or withdraw 0.
 * An error is thrown if a user attempts to withdraw money they do not have, which could be changed or adjusted if overdraft features were desired.
 * I have made 'record_transaction', which logs all the required transaction details, a private method in account. However I had previously written tests for this and I have left them in as commented in case this is not thought to be best practice.
+
+![IRB runthrough.](/images/irb_runthrough.png "IRB runthrough")
+
+### Post-review
+
+* Changes made after review - printing statements extracted to a separate statement class
+* More methods made private, further encapsulation.
+* More detailed use of doubles in tests to ensure unit testing is totally independent, stubbing dates in feature test to ensure requirements are met.
+* Making statement printing puts to STDOUT rather than simply returning a string.
+* Tests are written with rspec - to run them, run bundle in the parent directory, and then run rspec.
 
 ## User stories
 
