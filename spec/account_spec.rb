@@ -52,7 +52,7 @@ describe Account do
     describe 'after two transactions' do
       let(:transaction1) { double(:transaction, amount: 1000.00, deposit?: true, withdrawal?: false, balance_after: 1000.00, date: DateTime.new(2012, 1, 10)) }
       let(:transaction2) { double(:transaction, amount: 2000.00, deposit?: true, withdrawal?: false, balance_after: 3000.00, date: DateTime.new(2012, 1, 13)) }
-      let(:transaction_history) { double(:transaction_history, transactions: [transaction1, transaction2], empty?: false) }
+      let(:transaction_history) { double(:transaction_history, transactions: [transaction1, transaction2], empty?: false, most_recent: transaction2 ) }
       subject { described_class.new(transaction_history) }
       it 'returns balance after most recent transaction' do
         expect(subject.balance).to eq transaction2.balance_after

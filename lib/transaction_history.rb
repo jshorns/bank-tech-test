@@ -12,6 +12,10 @@ class TransactionHistory
     @transactions.empty?
   end
 
+  def most_recent
+    @transactions.last
+  end
+
   def add_transaction(transaction)
     @transactions << transaction
   end

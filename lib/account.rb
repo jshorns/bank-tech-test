@@ -17,7 +17,7 @@ class Account
     if first_transaction?
       OPENING_BALANCE
     else
-      @transaction_history.transactions.last.balance_after
+      @transaction_history.most_recent.balance_after
     end
   end
 

@@ -22,4 +22,14 @@ describe TransactionHistory do
       expect(subject.empty?).to be false
     end
   end
+
+  describe 'most_recent' do
+    let(:transaction) { double(:transaction) }
+    let(:transaction2) { double(:transaction) }
+    it 'returns the latest transaction' do
+      subject.add_transaction(transaction)
+      subject.add_transaction(transaction2)
+      expect(subject.most_recent).to eq transaction2
+    end
+  end
 end
