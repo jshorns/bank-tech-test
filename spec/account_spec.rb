@@ -3,7 +3,7 @@
 require 'account'
 
 describe Account do
-  let(:transaction_history) { double(:transaction_history, transactions: []) }
+  let(:transaction_history) { double(:transaction_history, transactions: [], empty?: true) }
   before(:each) { allow(transaction_history).to receive(:add_transaction) }
   subject { described_class.new(transaction_history) }
   amount = '500.00'
@@ -13,7 +13,6 @@ describe Account do
       expect(transaction).to receive(:amount=).with(amount.to_f)
       expect(transaction).to receive(:balance_after=).with(subject.balance + amount.to_f)
       expect(transaction_history).to receive(:add_transaction)
-      expect(transaction_history).to receive(:transactions)
       subject.deposit(amount, transaction)
     end
     it 'fails if amount is in incorrect format' do
@@ -53,7 +52,7 @@ describe Account do
     describe 'after two transactions' do
       let(:transaction1) { double(:transaction, amount: 1000.00, deposit?: true, withdrawal?: false, balance_after: 1000.00, date: DateTime.new(2012, 1, 10)) }
       let(:transaction2) { double(:transaction, amount: 2000.00, deposit?: true, withdrawal?: false, balance_after: 3000.00, date: DateTime.new(2012, 1, 13)) }
-      let(:transaction_history) { double(:transaction_history, transactions: [transaction1, transaction2]) }
+      let(:transaction_history) { double(:transaction_history, transactions: [transaction1, transaction2], empty?: false) }
       subject { described_class.new(transaction_history) }
       it 'returns balance after most recent transaction' do
         expect(subject.balance).to eq transaction2.balance_after

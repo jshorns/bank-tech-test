@@ -12,4 +12,14 @@ describe TransactionHistory do
       expect(subject.transactions[0]).to eq transaction
     end
   end
+  describe 'empty?' do
+    let(:transaction) { double(:transaction) }
+    it 'returns true if transactions array is empty' do
+      expect(subject.empty?).to be true
+    end
+    it 'returns false if transactions array is not empty' do
+      subject.add_transaction(transaction)
+      expect(subject.empty?).to be false
+    end
+  end
 end

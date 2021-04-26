@@ -8,6 +8,10 @@ class TransactionHistory
     @transactions = []
   end
 
+  def empty?
+    @transactions.empty?
+  end
+
   def add_transaction(transaction)
     @transactions << transaction
   end

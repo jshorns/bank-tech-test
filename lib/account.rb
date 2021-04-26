@@ -41,7 +41,7 @@ class Account
   private
 
   def first_transaction?
-    @transaction_history.transactions.empty?
+    @transaction_history.empty?
   end
 
   def record_transaction(amount, transaction)
