@@ -23,13 +23,13 @@ class Account
 
   def deposit(amount, transaction = Transaction.new(date = DateTime.now))
     amount = check_format(amount)
-    zero_value_transaction_error(amount)
+    validate_transaction(amount)
     record_transaction(amount, transaction)
   end
 
   def withdraw(amount, transaction = Transaction.new(date = DateTime.now))
     amount = check_format(amount)
-    zero_value_transaction_error(amount)
+    validate_transaction(amount)
     check_balance(amount)
     record_transaction(-amount, transaction)
   end
@@ -56,7 +56,7 @@ class Account
     amount.to_f
   end
 
-  def zero_value_transaction_error(amount)
+  def validate_transaction(amount)
     fail 'You must specify an amount more than zero.' if amount == 0
   end
 
